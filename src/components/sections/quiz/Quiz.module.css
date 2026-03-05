@@ -27,6 +27,24 @@
   margin-bottom: var(--spacing-2xl);
 }
 
+.cta {
+  display: inline-block;
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-on-accent);
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  text-align: center;
+  transition: background-color var(--transition-fast);
+}
+
+.cta:hover {
+  background-color: var(--color-primary-light);
+}
+
 .placeholder {
   text-align: center;
   color: var(--text-on-dark);

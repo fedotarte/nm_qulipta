@@ -7,6 +7,10 @@ export interface ArticleConfig {
   description?: string;
   status: ArticleStatus;
   icon?: string;
+  /** Кастомная ссылка (например, на игру). Если не задано — используется /articles/{slug} */
+  href?: string;
+  /** Всегда доступен без авторизации (для квиза, игры и т.п.) */
+  isAuthenticated?: boolean;
 }
 
 export const ARTICLES: ArticleConfig[] = [
@@ -18,6 +22,17 @@ export const ARTICLES: ArticleConfig[] = [
       "Цель терапии остается неизменной — важно стремиться к сохранению зрения и связанного с ним уровня жизни путем достижения терапевтического эффекта при мин…",
     status: "done",
     icon: "/icons/article-1.svg",
+  },
+  {
+    id: "quiz",
+    slug: "interactive-quiz",
+    title: "Интерактивный квиз",
+    description:
+      "Поставьте верный диагноз и назначьте лечение пациентке с головной болью. Клинический разбор с Мариной Игоревной Корешкиной, доктором медицинских наук, членом Европейской академии неврологии и Российского общества головной боли.",
+    status: "done",
+    icon: "/icons/book.svg",
+    href: "/game/",
+    isAuthenticated: true,
   },
   {
     id: "2",

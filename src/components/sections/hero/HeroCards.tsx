@@ -4,7 +4,7 @@ import styles from "./HeroCards.module.css";
 const cards = [
   { id: "chronic", title: "Хроническая мигрень", href: "#migraine-types" },
   { id: "episodic", title: "Эпизодическая мигрень", href: "#migraine-types" },
-  { id: "quiz", title: "Интерактивный квиз", href: "#quiz" },
+  { id: "quiz", title: "Интерактивный квиз", href: "/game/", openInNewTab: true },
   { id: "experts", title: "Ответы экспертов", href: "#experts" },
 ] as const;
 
@@ -14,12 +14,21 @@ export function HeroCards() {
       <ul className={styles.list}>
         {cards.map((card) => (
           <li key={card.id}>
-            <Link href={card.href} className={styles.card}>
-              <span className={styles.cardTitle}>{card.title}</span>
-              <span className={styles.arrow} aria-hidden="true">
-                &rarr;
-              </span>
-            </Link>
+            {"openInNewTab" in card && card.openInNewTab ? (
+              <a href={card.href} className={styles.card} target="_blank" rel="noopener noreferrer">
+                <span className={styles.cardTitle}>{card.title}</span>
+                <span className={styles.arrow} aria-hidden="true">
+                  &rarr;
+                </span>
+              </a>
+            ) : (
+              <Link href={card.href} className={styles.card}>
+                <span className={styles.cardTitle}>{card.title}</span>
+                <span className={styles.arrow} aria-hidden="true">
+                  &rarr;
+                </span>
+              </Link>
+            )}
           </li>
         ))}
       </ul>

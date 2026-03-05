@@ -8,7 +8,14 @@ export function Quiz() {
         <p className={styles.description}>
           Поставьте верный диагноз и назначьте лечение пациентке с головной болью.
         </p>
-        <p className={styles.placeholder}>Контент секции...</p>
+        <a
+          href="/game/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.cta}
+        >
+          Играть
+        </a>
       </div>
     </section>
   );

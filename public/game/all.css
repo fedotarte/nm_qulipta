@@ -1,0 +1,35 @@
+html {
+  height: 100%;
+  -webkit-text-size-adjust: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: #49515a;
+  font: 15px/18px 'dinproregular', Arial, 'TimesNewRoman', Verdana, sans-serif;
+  background: #f4f5f6;
+  min-width: 320px;
+}
+
+@media only screen and (min-width: 1700px) {
+  body {
+    font-size: 16px;
+    line-height: 23px;
+  }
+}
+
+a {
+  color: #000;
+  outline: none;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+* {
+  outline: none;
+}

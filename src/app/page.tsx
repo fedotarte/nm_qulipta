@@ -36,7 +36,7 @@ export default function Home() {
               <ArticleCard
                 article={article}
                 key={article.id}
-                isAuthenticated={index === 0}
+                isAuthenticated={article.isAuthenticated ?? index === 0}
               />
             );
           })}

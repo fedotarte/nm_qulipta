@@ -122,7 +122,12 @@ export const ArticleSlider = ({ articles }: ArticleSliderProps) => {
           >
             {articles.map((article, index) => (
               <SwiperSlide key={article.id} className={styles.slide}>
-                <ArticleCard article={article} isAuthenticated={index === 0} />
+                <ArticleCard
+                  article={article}
+                  isAuthenticated={
+                    article.isAuthenticated ?? index === 0
+                  }
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -182,8 +187,10 @@ export const ArticleCard = ({
 
   const cardClassName = isAuthenticated ? styles.card : styles.cardLocked;
 
+  const linkHref = article.href ?? `/articles/${article.slug}`;
+
   return (
-    <Link href={`/articles/${article.slug}`} className={cardClassName}>
+    <Link href={linkHref} className={cardClassName}>
       <ArticleIcon className={styles.mobileIcon} />
       {!isAuthenticated && <LockIcon className={styles.lockIcon} />}
       <div className={styles.cardContent}>
@@ -231,8 +238,10 @@ const MobileArticleCard = ({ article }: { article: ArticleConfig }) => {
     return <div className={styles.mobileCardDisabled}>{content}</div>;
   }
 
+  const linkHref = article.href ?? `/articles/${article.slug}`;
+
   return (
-    <Link href={`/articles/${article.slug}`} className={styles.mobileCard}>
+    <Link href={linkHref} className={styles.mobileCard}>
       {content}
     </Link>
   );
