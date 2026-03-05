@@ -1,45 +1,33 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import styles from './Hero.module.css';
+import Image from "next/image";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import styles from "./Hero.module.css";
 
-export function Hero() {
+interface HeroSectionProps {
+  children?: ReactNode;
+}
+
+export function HeroSection({ children }: HeroSectionProps) {
   return (
     <section id="hero" className={styles.hero}>
       {/* Фоновое изображение гепарда */}
       <Image
-        src="/pictures/cheetah_hero.jpg"
+        src="/pictures/cheetah.jpg"
         alt=""
         fill
         className={styles.backgroundImage}
         priority
       />
 
-      {/* Оверлей для читаемости текста (опционально) */}
+      {/* Оверлей для читаемости текста */}
       <div className={styles.overlay} aria-hidden="true" />
 
-      <div className={styles.container}>
-        <div className={styles.content}>
-          {/* Логотип */}
-          <Image
-            src="/icons/qlipta_hero_logo.svg"
-            alt="КЬЮЛИПТА"
-            width={320}
-            height={80}
-            className={styles.logo}
-            priority
-          />
-
-          <p className={styles.subtitle}>Атогепант</p>
-
-          <p className={styles.description}>
-            Современный препарат нового
-            <br />
-            поколения для профилактики
-            <br />
-            мигрени
-          </p>
-        </div>
+      <div className={styles.content}>
+        <h1 className={styles.title}>Быстрее, чем мигрень</h1>
       </div>
+
+      {/* Слот для карточек (как в glau: Hero + ArticleSlider) */}
+      {children}
 
       {/* Стрелка вниз */}
       <Link href="#migraine-types" className={styles.scrollDown}>
@@ -50,9 +38,6 @@ export function Hero() {
           height={48}
         />
       </Link>
-
-      {/* Угловой срез */}
-      <div className={styles.angledCut} aria-hidden="true" />
     </section>
   );
 }

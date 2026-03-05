@@ -1,0 +1,234 @@
+.header {
+    /*background: transparent;*/
+    position: relative;
+    z-index: 1;
+    padding-top: 24px;
+}
+
+.headerHidden {
+    visibility: hidden;
+}
+
+
+.separator {
+    display: block;
+    height: 1px;
+    background-color: var(--color-white);
+    margin: 20px;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+  margin: 0;
+  height: 100%;
+  padding: 0 24px;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navList li {
+    width: 120px;
+    text-align: center;
+}
+
+.navLink {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-light);
+  transition: opacity 0.2s ease;
+
+}
+
+.navLink:hover {
+  opacity: 0.8;
+}
+
+.loginButton {
+    display: none;
+  padding-block: 10px;
+  font-size: 16px;
+  font-weight: 700;
+    line-height: 100%;
+  width: 155px;
+  color: var(--color-text-light);
+  background-color: var(--login-button-bg);
+  border-radius: var(--radius-login-button);
+  transition: background-color 0.2s ease;
+  box-shadow: 0 8px 24px 0 #BCF3FF40, 0 2px 4px 0 #00000040;
+}
+
+.loginButton:hover {
+  background-color: var(--login-button-bg-hover);
+}
+
+.burgerButton {
+    display: flex;
+}
+
+/* Mobile Drawer */
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    /*background: rgba(19, 93, 108, 0.7);*/
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    overflow-y: auto;
+}
+
+.drawerOpen {
+    transform: translateX(0);
+}
+
+.drawerContent {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    min-height: 100%;
+}
+
+.drawerCloseButton {
+    align-self: flex-end;
+    margin-bottom: 32px;
+}
+
+.drawerNav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.drawerLink {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: opacity 0.2s ease;
+}
+
+.drawerLink::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.drawerLink:hover {
+    opacity: 0.8;
+}
+
+.drawerLoginButton {
+    margin-top: 24px;
+    padding: 16px 32px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-white);
+    background-color: #7CE0DA;
+    border-radius: var(--radius-login-button);
+    transition: background-color 0.2s ease;
+    text-align: center;
+    box-shadow: 0 8px 24px 0 rgba(188, 243, 255, 0.25), 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.drawerLoginButton:hover {
+    background-color: var(--login-button-bg-hover);
+}
+
+.drawerFooter {
+    margin-top: auto;
+    padding-top: 40px;
+}
+
+.drawerLogo {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+}
+
+.drawerFooterText {
+    padding: 16px 0;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--color-white);
+    border-bottom: 2px solid #ffffff;
+    letter-spacing: 0.05em;
+}
+
+.drawerFooterText a {
+    color: var(--color-text-mobile-link);
+    text-decoration: underline;
+}
+
+.drawerFooterText:last-child {
+    border-bottom: none;
+}
+
+.drawerFooterText p {
+    margin-bottom: 4px;
+}
+
+.drawerFooterText p:last-child {
+    margin-bottom: 0;
+}
+
+.overlay {
+    display: none;
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+    .header {
+        padding: 0;
+        /*background: linear-gradient(90deg, rgba(19, 93, 108, 0.7) 0%, rgba(10, 153, 166, 0.7) 100%);*/
+        /*box-shadow: 0 4px 6px 0 rgba(3, 20, 23, 0.3);*/
+        backdrop-filter: blur(24px);
+    }
+
+    .separator {
+        display: none;
+    }
+
+    .nav {
+        padding: 10px 24px;
+    }
+
+    .navList li {
+        width: auto;
+        text-align: start;
+    }
+
+    .navLink {
+        font-weight: 600;
+    }
+
+    .loginButton {
+        display: initial;
+    }
+
+    .burgerButton {
+        display: none;
+    }
+
+    .drawer,
+    .overlay {
+        display: none;
+    }
+}

@@ -1,4 +1,5 @@
-export { Hero } from "./hero";
+export { HeroSection } from "./hero";
+export { HeroCards } from "./hero";
 export { MigraineTypes } from "./migraine-types";
 export { Quiz } from "./quiz";
 export { ClinicalCases } from "./clinical-cases";

@@ -1,7 +1,6 @@
-export { Header } from "./Header";
-export { Footer } from "./Footer";
-export { Hero } from "./Hero";
-export { Nav } from "./Nav";
-export { Button } from "./Button";
-export { ScrollSpy } from "./ScrollSpy";
-export * from "./sections";
+export * from "./article-slider";
+export * from "./background-video";
+export * from "./header";
+export * from "./hero";
+export * from "./footer";
+export * from "./scroll-shadow-list";

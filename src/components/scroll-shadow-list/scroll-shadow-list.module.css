@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 6px;
+    height: 350px;
+    margin-top: auto;
+    padding-bottom: 32px;
+    overflow: auto;
+    position: relative;
+}
+
+/* Обе тени (проскроллили, но не до конца) */
+.shadowTop.shadowBottom {
+    mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #EAEAEA 6.35%, #C9C9C9 53.38%, #B1B1B1 90.05%, rgba(153, 153, 153, 0) 100%);
+    -webkit-mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #EAEAEA 6.35%, #C9C9C9 53.38%, #B1B1B1 90.05%, rgba(153, 153, 153, 0) 100%);
+}
+
+/* Только верхняя тень (доскроллили до конца) */
+.shadowTop:not(.shadowBottom) {
+    mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #EAEAEA 6.35%, #000 100%);
+    -webkit-mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #EAEAEA 6.35%, #000 100%);
+}
+
+/* Только нижняя тень (в начале списка) */
+.shadowBottom:not(.shadowTop) {
+    mask-image: linear-gradient(180deg, #000 0%, #B1B1B1 90.05%, rgba(153, 153, 153, 0) 100%);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #B1B1B1 90.05%, rgba(153, 153, 153, 0) 100%);
+}
+
+@media (min-width: 1024px) {
+    .container {
+        display: none;
+    }
+}

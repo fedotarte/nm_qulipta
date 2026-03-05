@@ -1,0 +1,73 @@
+/* Ряд карточек под героем (по образцу glau article-slider карточек) */
+.wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding-inline: var(--container-padding);
+  padding-bottom: clamp(24px, 4vw, 48px);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 200px;
+  padding: 16px 20px;
+  background: rgba(217, 78, 21, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  color: var(--color-white);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.cardTitle {
+  flex: 1;
+}
+
+.arrow {
+  font-size: 1.25em;
+  opacity: 0.9;
+}
+
+@media (min-width: 1024px) {
+  .list {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+  }
+
+  .list::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .card {
+    flex-shrink: 0;
+    min-width: 220px;
+    padding: 20px 24px;
+    font-size: var(--font-size-base);
+  }
+}

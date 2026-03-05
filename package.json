@@ -1,26 +1,27 @@
 {
-  "name": "nm_qulipta",
+  "name": "glau",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
-    "next": "16.1.1",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "next": "^16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "swiper": "^12.1.2"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "24.8.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
-    "eslint-config-next": "16.1.1",
-    "prettier": "^3.7.4",
+    "eslint-config-next": "16.1.6",
+    "prettier": "3.8.1",
     "typescript": "^5"
   }
 }

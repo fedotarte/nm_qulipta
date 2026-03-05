@@ -1,39 +1,49 @@
-import {
-  Hero,
-  ScrollSpy,
-  MigraineTypes,
-  Quiz,
-  ClinicalCases,
-  Experts,
-  Webinars,
-  Library,
-  Documents,
-} from "@/components";
+import Image from "next/image";
 import styles from "./page.module.css";
-
-const sectionIds = [
-  'hero',
-  'migraine-types',
-  'quiz',
-  'clinical-cases',
-  'experts',
-  'webinars',
-  'library',
-  'documents',
-];
+import {
+  ArticleSlider,
+  ArticleCard,
+  Footer,
+  Header,
+  Hero,
+  ScrollShadowList,
+} from "@/components";
+import { getAllArticles } from "@/content";
 
 export default function Home() {
+  const articles = getAllArticles();
+
   return (
     <div className={styles.page}>
-      <ScrollSpy sectionIds={sectionIds} offset={-100} />
-      <Hero />
-      <MigraineTypes />
-      <Quiz />
-      <ClinicalCases />
-      <Experts />
-      <Webinars />
-      <Library />
-      <Documents />
+      <Image
+        src="/pictures/cheetah.jpg"
+        alt=""
+        fill
+        className={styles.backgroundVideo}
+        priority
+      />
+      <div className={styles.globalMobileFide}></div>
+      <div className={styles.globalMobileFideBottom}></div>
+      <Header />
+
+      <main className={styles.main}>
+        <Hero title="Быстрее, чем мигрень" subtitle="" description="">
+          <ArticleSlider articles={articles} />
+        </Hero>
+        <ScrollShadowList>
+          {articles.map((article, index) => {
+            return (
+              <ArticleCard
+                article={article}
+                key={article.id}
+                isAuthenticated={index === 0}
+              />
+            );
+          })}
+        </ScrollShadowList>
+      </main>
+
+      <Footer />
     </div>
   );
 }

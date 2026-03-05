@@ -29,6 +29,13 @@
   - `getArticleSlugs()`
 - Не подключаем внешние запросы/БД до появления явного требования.
 
+## Лейаут страницы (образец: nm_landings/glau)
+
+- Структура главной страницы приведена к проекту **glau** (соседний репозиторий в `nm_landings/glau`).
+- Обёртка: `div.page` (min-height 100vh, flex column, overflow-x hidden), внутри — `main.main` (flex: 1, position relative, z-index 1). Стили в `src/app/page.module.css`.
+- Hero-секция: заголовок + фоновое изображение + слот `children` для блока карточек под героем (аналогично glau: Hero + ArticleSlider). Компонент `HeroSection` принимает `children` (например, `HeroCards`).
+- Переменная `--z-header` в globals для консистентности с glau. При доработке хедера/мобильного меню можно опираться на glau (drawer, body.drawer-open).
+
 ## Верстка и стили (CSS Modules)
 
 - Один компонент = один `*.module.css`.

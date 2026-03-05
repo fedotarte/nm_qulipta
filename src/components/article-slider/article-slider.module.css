@@ -1,0 +1,537 @@
+.slider {
+  z-index: var(--z-slider);
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .slider {
+        display: initial;
+    }
+}
+
+/* ===== DESKTOP SWIPER ===== */
+.desktopSlider {
+  display: block;
+  position: relative;
+}
+
+.swiperContainer {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-x: clip;
+  overflow-y: visible;
+  padding-right: 24px;
+  padding-top: 150px;
+  margin-top: -150px;
+}
+
+/* Mask only on right side (at beginning) */
+.swiperContainer.maskRight {
+  -webkit-mask-image: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 87%, rgba(153, 153, 153, 0) 100%);
+  mask-image: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 87%, rgba(153, 153, 153, 0) 100%);
+}
+
+/* Mask only on left side (at end) */
+.swiperContainer.maskLeft {
+  -webkit-mask-image: linear-gradient(90deg, rgba(153, 153, 153, 0) 0%, #FFFFFF 13%, #FFFFFF 100%);
+  mask-image: linear-gradient(90deg, rgba(153, 153, 153, 0) 0%, #FFFFFF 13%, #FFFFFF 100%);
+}
+
+/* Mask on both sides (in middle) */
+.swiperContainer.maskBoth {
+  -webkit-mask-image: linear-gradient(90deg, rgba(153, 153, 153, 0) 0%, #FFFFFF 13%, #FFFFFF 87%, rgba(153, 153, 153, 0) 100%);
+  mask-image: linear-gradient(90deg, rgba(153, 153, 153, 0) 0%, #FFFFFF 13%, #FFFFFF 87%, rgba(153, 153, 153, 0) 100%);
+}
+
+.swiper {
+  width: 100%;
+  overflow: visible !important;
+}
+
+.slide {
+  width: auto !important;
+  height: auto;
+}
+
+.slide:first-child {
+  margin-left: 24px;
+}
+
+.slide:last-child {
+  margin-right: 24px !important;
+}
+
+/* Cards */
+.card,
+.cardLocked,
+.cardDisabled {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 306px;
+  height: 72px;
+  padding-right: 56px;
+  padding-left: 56px;
+  border-radius: 17px;
+  cursor: pointer;
+  transition: height 0.3s ease, margin-top 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+  gap: 6px;
+}
+
+@media (min-width: 1024px) {
+    .card,
+    .cardLocked,
+    .cardDisabled {
+        justify-content: start;
+        gap: 12px;
+        padding: 16px;
+        padding-left: 16px;
+        padding-right: 52px;
+        height: 110px;
+    }
+}
+
+.card,
+.cardLocked {
+  background: rgba(19, 93, 108, 0.70);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.lockIcon {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+}
+
+.cardDescriptionBlurred {
+  display: none;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cardDivider {
+  display: none;
+  transition: none;
+}
+
+.cardDescription {
+  display: none;
+  transition: none;
+}
+
+.cardButton {
+  display: none;
+  transition: none;
+}
+
+.cardArrowIcon, .mobileIcon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  transition: opacity 0.3s ease;
+}
+
+.mobileIcon {
+    left: 16px;
+}
+.cardArrowIconDisabled {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+}
+
+.cardArrowIconDisabled path {
+  fill: var(--color-text-muted);
+  stroke: var(--color-text-muted);
+}
+.cardDisabled path {
+  fill: var(--color-text-muted);
+}
+
+/* Desktop hover state */
+@media (min-width: 1024px) {
+  .card {
+    transform-origin: bottom center;
+  }
+
+  .card:hover {
+    position: relative;
+    z-index: 20;
+    width: 306px;
+    height: 260px;
+    margin-top: -150px;
+    background: 
+      linear-gradient(0deg, rgba(19, 93, 108, 0.2), rgba(19, 93, 108, 0.2)),
+      linear-gradient(0deg, rgba(124, 224, 218, 0.5), rgba(124, 224, 218, 0.5));
+    backdrop-filter: blur(24px);
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.25);
+    padding: 16px;
+    gap: 12px;
+    border-radius: 17px;
+    justify-content: flex-start;
+  }
+
+  .card:hover .cardArrowIcon {
+    opacity: 0;
+  }
+
+  .card:hover .cardTitle {
+    color: rgba(255, 255, 255, 1);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 100%;
+  }
+
+  .card:hover .cardDivider {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 4px;
+    margin: 12px 0;
+  }
+
+  .card:hover .cardDescription {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(255, 255, 255, 1);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 100%;
+  }
+
+  .card:hover .cardContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card:hover .cardButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    padding: 8px 12px;
+    margin-top: auto;
+    background: rgba(19, 93, 108, 1);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 1);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 100%;
+    box-shadow: 0px 4px 14px 0px rgba(3, 20, 23, 0.3);
+  }
+
+  .cardButtonArrow {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Locked card state (not authenticated) */
+  .cardLocked {
+    transform-origin: bottom center;
+  }
+
+  .cardLocked:hover {
+    position: relative;
+    z-index: 20;
+    width: 306px;
+    height: 260px;
+    margin-top: -150px;
+    background: 
+      linear-gradient(0deg, rgba(19, 93, 108, 0.2), rgba(19, 93, 108, 0.2)),
+      linear-gradient(0deg, rgba(124, 224, 218, 0.5), rgba(124, 224, 218, 0.5));
+    backdrop-filter: blur(24px);
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.25);
+    padding: 16px;
+    gap: 12px;
+    border-radius: 17px;
+    justify-content: flex-start;
+  }
+
+  .cardLocked:hover .cardArrowIcon {
+    opacity: 0;
+  }
+
+  .cardLocked:hover .cardTitle {
+    color: rgba(255, 255, 255, 1);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 100%;
+    padding-right: 24px;
+  }
+
+  .cardLocked:hover .cardDivider {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 4px;
+    margin: 12px 0;
+  }
+
+  .cardLocked:hover .cardDescriptionBlurred {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 100%;
+    filter: blur(1px);
+    user-select: none;
+  }
+
+  .cardLocked:hover .cardContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cardLocked:hover .cardButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    padding: 8px 12px;
+    margin-top: auto;
+    background: rgba(19, 93, 108, 1);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 1);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 100%;
+    box-shadow: 0px 4px 14px 0px rgba(3, 20, 23, 0.3);
+  }
+
+  .cardLocked:hover .lockIcon {
+    display: block;
+  }
+}
+
+.cardDisabled {
+  background: rgba(19, 93, 108, 0.7);
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(24px);
+  cursor: not-allowed;
+}
+
+.cardDisabled:hover {
+  transform: none;
+}
+
+.cardTitle {
+  color: var(--color-text-light);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 100%;
+  transition: all 0.3s ease;
+}
+
+.cardDisabled .cardTitle {
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 1024px) {
+    .cardTitle {
+        font-size: 22px;
+    }
+}
+
+.cardArrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.4;
+  width: 24px;
+  height: 24px;
+}
+
+.devBadge {
+    line-height: 100%;
+    font-size: 10px;
+    font-weight: 600;
+    background: rgba(19, 93, 108, 1);
+    color: rgba(255, 255, 255, 1);
+
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 1024px) {
+    .devBadge {
+        font-size: 12px;
+        color: var(--color-white);
+        background-color:var(--color-primary);
+    }
+}
+
+@media (min-width: 1024px) {
+    .devBadge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+}
+
+/* Navigation buttons */
+.navButton {
+  position: absolute;
+  bottom: 23px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: rgba(124, 224, 218, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background-color 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.navButton:hover {
+  background-color: rgba(104, 204, 198, 1);
+}
+
+.navButton svg {
+  width: 40px;
+  height: 40px;
+}
+
+.navButtonPrev {
+  left: 24px;
+}
+
+.navButtonPrev svg {
+  transform: rotate(180deg);
+}
+
+.navButtonNext {
+  right: 24px;
+}
+
+/* ===== MOBILE LIST ===== */
+.mobileList {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 var(--container-padding);
+}
+
+.mobileCard,
+.mobileCardDisabled {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 336px;
+  max-width: 100%;
+  height: 72px;
+  padding: 16px;
+  background: var(--card-highlighted-bg);
+  border-radius: var(--radius-card);
+  backdrop-filter: var(--card-highlighted-blur);
+  -webkit-backdrop-filter: var(--card-highlighted-blur);
+}
+
+.mobileCard {
+  transition: transform 0.2s ease;
+}
+
+.mobileCard:active {
+  transform: scale(0.98);
+}
+
+.mobileCardDisabled {
+  opacity: 0.6;
+}
+
+.mobileCardDisabled .mobileTitle {
+  color: var(--color-text-muted);
+}
+
+.mobileCardDisabled .mobileArrow path {
+  fill: var(--color-text-muted);
+  stroke: var(--color-text-muted);
+}
+
+.mobileIcon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileTitle {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 100%;
+  color: #fff;
+}
+
+.mobileArrow {
+  flex-shrink: 0;
+  opacity: 0.7;
+  width: 24px;
+  height: 24px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .slider {
+    position: relative;
+    padding-bottom: 0;
+  }
+
+  .desktopSlider {
+    display: none;
+  }
+
+  .mobileList {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+    .mobileIcon {
+        display: none;
+    }
+}

@@ -1,2 +1,2 @@
-export { Hero } from './Hero';
-
+export { HeroSection } from "./Hero";
+export { HeroCards } from "./HeroCards";
