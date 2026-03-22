@@ -31,8 +31,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/fedotarte/nm_glau:latest
-            ghcr.io/fedotarte/nm_glau:${{ github.sha }}
+            ghcr.io/fedotarte/nm_qulipta:latest
+            ghcr.io/fedotarte/nm_qulipta:${{ github.sha }}
 
   deploy:
     needs: build
@@ -47,7 +47,7 @@ jobs:
           port: ${{ secrets.SERVER_PORT || 22 }}
           script: |
             set -e
-            cd /opt/glau
+            cd /opt/qulipta
 
             # логин в GHCR на сервере не нужен, если образ публичный.
             # если приватный — надо docker login, и тогда лучше использовать PAT.
