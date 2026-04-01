@@ -36,6 +36,15 @@ export const ARTICLES: ArticleConfig[] = [
   },
   {
     id: "2",
+    slug: "episodic-migraine",
+    title: "Эпизодическая мигрень",
+    description:
+      "Страница статьи с материалами по профилактической терапии эпизодической мигрени.",
+    status: "done",
+    icon: "/icons/book.svg",
+  },
+  {
+    id: "3",
     slug: "neuroprotection",
     title: "Нейропротекция при глаукоме",
     description:
@@ -44,7 +53,7 @@ export const ARTICLES: ArticleConfig[] = [
     icon: "/icons/article-2.svg",
   },
   {
-    id: "3",
+    id: "4",
     slug: "apg-difference",
     title: "АПГ: В чем разница между молекулами?",
     description:
@@ -53,7 +62,7 @@ export const ARTICLES: ArticleConfig[] = [
     icon: "/icons/article-3.svg",
   },
   {
-    id: "4",
+    id: "5",
     slug: "lumistart",
     title: "ЛЮМИСТАРТ — новый старт в терапии ПОУГ",
     description:
@@ -62,7 +71,7 @@ export const ARTICLES: ArticleConfig[] = [
     icon: "/icons/article-4.svg",
   },
   {
-    id: "5",
+    id: "6",
     slug: "quality-of-life",
     title: "Как повысить качество жизни у пациентов с глаукомой?",
     description:
@@ -71,7 +80,7 @@ export const ARTICLES: ArticleConfig[] = [
     icon: "/icons/article-5.svg",
   },
   {
-    id: "6",
+    id: "7",
     slug: "surface-diseases",
     title: "Заболевания поверхности глаз и приверженность к лечению",
     description:
@@ -80,7 +89,7 @@ export const ARTICLES: ArticleConfig[] = [
     icon: "/icons/article-6.svg",
   },
   {
-    id: "7",
+    id: "8",
     slug: "therapy-start",
     title: "Старт терапии: какой препарат выбрать?",
     description:
@@ -89,7 +98,7 @@ export const ARTICLES: ArticleConfig[] = [
     icon: "/icons/article-7.svg",
   },
   {
-    id: "8",
+    id: "9",
     slug: "patient-memo",
     title: "Памятка для пациентов",
     description:
