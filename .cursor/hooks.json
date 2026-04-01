@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "hooks": {
+    "subagentStart": [
+      {
+        "command": ".cursor/hooks/subagent-state.sh start"
+      }
+    ],
+    "subagentStop": [
+      {
+        "command": ".cursor/hooks/subagent-state.sh stop"
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": ".cursor/hooks/guard-shared-ui.sh",
+        "matcher": "Write|StrReplace"
+      }
+    ]
+  }
+}
