@@ -32,8 +32,9 @@ export async function GET(
 
   try {
     const file = await readFile(assetPath);
+    const body = new Uint8Array(file);
 
-    return new Response(file, {
+    return new Response(body, {
       headers: {
         "Content-Type": "image/png",
         "Cache-Control": "no-store",
