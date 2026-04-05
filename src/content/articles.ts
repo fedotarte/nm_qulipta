@@ -44,6 +44,15 @@ export const ARTICLES: ArticleConfig[] = [
     icon: "/icons/book.svg",
   },
   {
+    id: "10",
+    slug: "chronic-migraine",
+    title: "Хроническая мигрень",
+    description:
+      "Страница статьи с материалами по профилактической терапии хронической мигрени.",
+    status: "done",
+    icon: "/icons/book.svg",
+  },
+  {
     id: "3",
     slug: "neuroprotection",
     title: "Нейропротекция при глаукоме",

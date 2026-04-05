@@ -180,7 +180,7 @@
 }
 
 .studyQrColumn {
-  width: 131px;
+  width: 113px;
   flex: 0 0 auto;
 }
 
@@ -193,8 +193,8 @@
 }
 
 .studyQr {
-  width: 131px;
-  height: 132px;
+  width: 113px;
+  height: 114px;
   flex: 0 0 auto;
   display: block;
 }
@@ -205,6 +205,37 @@
   font-size: 12px;
   font-weight: 300;
   line-height: 1;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.chronicStudyRight {
+  display: flex;
+  flex: 1 1 auto;
+  width: 818px;
+  min-height: 182px;
+  min-width: 0;
+  max-width: 100%;
+  flex-direction: column;
+}
+
+.chronicStudyRight .studyText {
+  width: 818px;
+  max-width: 100%;
+}
+
+.chronicReferences {
+  margin: 0;
+  padding: 0;
+}
+
+.chronicReferences .referencesAccordion {
+  padding: 16px 0 0;
+}
+
+.chronicReferencesList {
+  margin: 0;
 }
 
 .aeCardWrap {
@@ -328,6 +359,14 @@
   padding-bottom: 20px;
 }
 
+.references.chronicReferences {
+  width: 818px;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  margin-top: auto;
+}
+
 .referencesTitle {
   margin: 0;
   color: #fff;
@@ -373,6 +412,17 @@
 
 .referencesList li + li {
   margin-top: 2px;
+}
+
+.referencesList.chronicReferencesList {
+  margin: 0;
+  padding-left: 0;
+  list-style-position: inside;
+}
+
+.referencesList.chronicReferencesList li {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .sidebar {
@@ -523,6 +573,22 @@
 
   .studyBlock {
     flex-direction: column;
+  }
+
+  .chronicStudyRight {
+    width: 100%;
+  }
+
+  .chronicStudyRight .studyText {
+    width: 100%;
+  }
+
+  .chronicReferences .referencesAccordion {
+    padding-top: 24px;
+  }
+
+  .chronicReferencesList {
+    margin: 0;
   }
 
   .sidebar {
