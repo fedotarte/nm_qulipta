@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { ARTICLES } from "@/content";
+import { Footer } from "@/components";
+import { LightboxImage } from "./LightboxImage";
 import styles from "./page.module.css";
 
 export default async function ArticlePage(
@@ -15,14 +17,26 @@ export default async function ArticlePage(
   if (slug === "episodic-migraine") {
     return (
       <main className={styles.page}>
-        <div className={styles.desktop}>
-          <header className={styles.topBar}>
-            <div className={styles.topBrand}>КЬЮЛИПТА</div>
+        <header className={styles.topBar}>
+          <div className={styles.topBarInner}>
+            <img
+              src="/icons/logo.svg"
+              alt="КЬЮЛИПТА"
+              className={styles.topBrandLogo}
+            />
             <button type="button" className={styles.accountButton}>
+              <img
+                src="/icons/profile-circle.svg"
+                alt=""
+                aria-hidden="true"
+                className={styles.accountButtonIcon}
+              />
               Личный кабинет
             </button>
-          </header>
+          </div>
+        </header>
 
+        <div className={styles.desktop}>
           <div className={styles.contentGrid}>
             <section className={styles.mainColumn}>
               <h1 className={styles.title}>ЭПИЗОДИЧЕСКАЯ МИГРЕНЬ</h1>
@@ -31,10 +45,10 @@ export default async function ArticlePage(
                 <h2 className={styles.sectionTitle}>
                   КЬЮЛИПТА ОБЛАДАЕТ ВЫСОКИМ СРОДСТВОМ И АКТИВНОСТЬЮ К CGRP-РЕЦЕПТОРУ
                 </h2>
-                <img
-                  src="/api/figma-assets/episodic-migraine-full"
+                <LightboxImage
+                  src="/pictures/cgrp-affinity-activity.png"
                   alt="Иллюстрация механизма действия"
-                  className={styles.firstBlockCrop}
+                  className={styles.sectionImage}
                 />
               </article>
 
@@ -42,7 +56,7 @@ export default async function ArticlePage(
                 <h2 className={styles.sectionTitle}>
                   ПРЕВЕНТИВНАЯ ТЕРАПИЯ МИГРЕНИ, КОТОРАЯ МОЖЕТ ДЕЙСТВОВАТЬ БЫСТРО
                 </h2>
-                <img
+                <LightboxImage
                   src="/api/figma-assets/episodic-migraine-2-1-1"
                   alt="Сокращение среднего числа дней с мигренью"
                   className={styles.sectionImage}
@@ -54,7 +68,7 @@ export default async function ArticlePage(
                   У КАЖДОГО ВТОРОГО ПАЦИЕНТА К КОНЦУ 1 ГОДА ТЕРАПИИ ЗАФИКСИРОВАНО
                   ПОЛНОЕ ПРЕКРАЩЕНИЕ ПРИСТУПОВ
                 </h2>
-                <img
+                <LightboxImage
                   src="/api/figma-assets/episodic-migraine-3-2-1"
                   alt="Поисковая конечная точка эффективности"
                   className={styles.sectionImage}
@@ -67,50 +81,233 @@ export default async function ArticlePage(
                   СРАВНЕНИЮ С ПЛАЦЕБО
                 </h2>
                 <div className={styles.aeCardWrap}>
-                  <img
-                    src="/api/figma-assets/episodic-migraine-group-4"
-                    alt="Частота нежелательных явлений"
-                    className={styles.aeCardImage}
-                  />
+                  <div className={styles.aeLayout}>
+                    <div className={styles.aeTopMenu}>
+                      <span className={styles.aeTopMenuPrimary}>
+                        ЭПИЗОДИЧЕСКАЯ МИГРЕНЬ, 60 мг
+                      </span>
+                      <span className={styles.aeTopMenuSecondary}>
+                        ИССЛЕДОВАНИЕ ADVANCE
+                      </span>
+                    </div>
+
+                    <div className={styles.aeContent}>
+                      <ul className={styles.aeFacts}>
+                        <li>
+                          <span className={styles.aeIconCircle}>
+                            <img
+                              src="/icons/ae-shield.svg"
+                              alt=""
+                              aria-hidden="true"
+                              className={styles.aeIconShield}
+                            />
+                          </span>
+                          <p>
+                            В 12-недельном исследовании препарат Кьюлипта 60 мг
+                            характеризовался хорошей переносимостью по
+                            сравнению с плацебо в течение 12 недель
+                          </p>
+                        </li>
+                        <li>
+                          <span
+                            className={`${styles.aeIconCircle} ${styles.aeIconHours}`}
+                          >
+                            11
+                            <br />
+                            часов
+                          </span>
+                          <p>Период полувыведения атогепанта 11 часов</p>
+                        </li>
+                        <li>
+                          <span className={styles.aeIconCircle}>
+                            <img
+                              src="/icons/ae-target.svg"
+                              alt=""
+                              aria-hidden="true"
+                              className={styles.aeIconGlyph}
+                            />
+                          </span>
+                          <p>
+                            У пациентов, принимавших Кьюлипта 60 мг или плацебо,
+                            не было зарегистрировано серьезных НЯ, связанных с
+                            лечением
+                          </p>
+                        </li>
+                      </ul>
+
+                      <LightboxImage
+                        src="/api/figma-assets/episodic-migraine-group-4"
+                        alt="Частота нежелательных явлений"
+                        className={styles.aeCardImage}
+                      />
+                    </div>
+                  </div>
                 </div>
               </article>
 
-              <img
+              <LightboxImage
                 src="/api/figma-assets/episodic-migraine-frame-163"
                 alt="Блок с преимуществами и упаковкой"
-                className={styles.sectionImage}
+                className={`${styles.sectionImage} ${styles.packageBlockImage}`}
               />
 
-              <img
+              <LightboxImage
                 src="/api/figma-assets/episodic-migraine-frame-194"
                 alt="В каких случаях рекомендуется модификация дозы до 10 мг"
-                className={styles.sectionImage}
+                className={`${styles.sectionImage} ${styles.doseAdjustmentImage}`}
               />
 
+              <section className={styles.studyBlock}>
+                <div className={styles.studyQrColumn}>
+                  <p className={styles.studyQrCaption}>
+                    общая характеристика
+                    <br />
+                    лекарственного
+                    <br />
+                    препарата КЬЮЛИПТА
+                  </p>
+                  <img
+                    src="/icons/qr.svg"
+                    alt="QR-код с дополнительной информацией"
+                    className={styles.studyQr}
+                  />
+                </div>
+                <p className={styles.studyText}>
+                  Исследование ADVANCE: 12-недельное многоцентровое двойное
+                  слепое рандомизированное плацебо-контролируемое исследование
+                  фазы III в параллельных группах с целью изучения эффективности
+                  и безопасности препарата Кьюлипта для профилактики
+                  эпизодической мигрени. Включало пациентов, соответствующих
+                  критериям международной классификации головных болей (ICHD)
+                  для диагностики мигрени с аурой или без (от 4 до 14 дней с
+                  мигренью в месяц). Оценка эффективности основывалась на
+                  первичной конечной точке - снижении среднего количества дней с
+                  мигренью в месяц по сравнению с исходным уровнем в течение 12
+                  недель.
+                  <br />
+                  <br />
+                  Открытое 52-недельное исследование безопасности: 744 пациента
+                  были рандомизированы в соотношении 5:2 в группу препарата
+                  Кьюлипта 60 мг (N = 546) или стандартной терапии для
+                  профилактики мигрени (n = 198). В исследование были включены
+                  взрослые пациенты из предыдущего исследования фазы IIb/III,
+                  повторно подтвердившие соответствие критериям включения для
+                  участия в исследовании, а также новые пациенты. У участников
+                  отмечалось от 4 до 14 дней с мигренью в 28-дневный период на
+                  этапе включения. Показатели эффективности: изменение среднего
+                  количества дней с мигренью в месяц по методу наименьших
+                  квадратов по сравнению с уровнем на этапе включения, дней
+                  умеренной/тяжелой головной боли, среднемесячного количества
+                  дней приема лекарственных препаратов для купирования приступов
+                  и долю ответивших на лечение на основании уменьшения
+                  количества дней с мигренью в месяц оценивали в популяции mITT
+                  (n = 521 пациентов, получавших препарат Кьюлипта) при
+                  использовании модели смешанных эффектов для повторных
+                  измерений. Конечные точки эффективности для оценки
+                  долгосрочной эффективности не классифицировались как
+                  первичные, вторичные или дополнительные. Данные о клинической
+                  эффективности были получены только в группе препарата Кьюлипта
+                  посредством данных eDiary.
+                </p>
+              </section>
+
               <section className={styles.disclaimer}>
-                CGRP — кальцитонин ген родственный пептид. R-CGRP — рецептор к
-                кальцитонин ген родственному пептиду. mITT — модифицированная
-                популяция всех пациентов с назначенным лечением.
+                CGRP - кальцитонин ген родственный пептид R-CGRP - рецептор к
+                кальцитонин ген родственному пептиду mITT - модифицированная
+                популяция всех пациентов с назначенным лечением ДММ - дни с
+                мигренью в месяц
+                <br />
+                <br />
+                *Ki - константа ингибирования рецептора, является мерой
+                сродства ингибитора к рецептору и показывает, насколько сильно
+                ингибитор подавляет активность рецептора. Низкая Ki указывает на
+                сильное сродство ингибитора к рецептору, требуется меньшая
+                концентрация ингибитора для достижения того же уровня
+                ингибирования.
+                <br />
+                † - Пациентов с 4-14 днями мигрени в месяц рандомизировали в
+                группу приема КЬЮЛИПТА 60 мг 1 раз в день или группу приема
+                стандартной профилактической терапии. Эффективность оценивалась
+                только в группе КЬЮЛИПТА. В исследование включено 546 пациентов
+                (mITT - 521), лечение завершили 373 пациента.
+                <br />
+                ‡ - *0% приступов определяется как 0 дней с мигренью в
+                определенный период (или специфический интервал)
               </section>
 
               <section className={styles.references}>
-                <h3 className={styles.referencesTitle}>Список литературы</h3>
-                <p className={styles.referencesText}>
-                  1. Haanes KA, Edvinsson L. Pathophysiological Mechanisms in
-                  Migraine and the Identification of New Therapeutic Targets.
-                  CNS Drugs. 2019;33(6):525-537. 2. Moore E, et al.
-                  Pharmacologic characterization of atogepant: A potent and
-                  selective calcitonin gene-related peptide receptor antagonist.
-                  Cephalalgia. 2024;44(1). 3. Ashina M, Tepper SJ, Reuter U, et
-                  al. Once-daily oral atogepant for the long-term preventive
-                  treatment of migraine. Headache. 2023;63(1):79-88.
-                </p>
+                <details className={styles.referencesAccordion} open>
+                  <summary className={styles.referencesTitle}>
+                    <span>Список литературы</span>
+                    <img
+                      src="/icons/base_arrow_right.svg"
+                      alt=""
+                      aria-hidden="true"
+                      className={styles.referencesArrow}
+                    />
+                  </summary>
+                  <ol className={styles.referencesList}>
+                    <li>
+                      Haanes KA, Edvinsson L. Pathophysiological Mechanisms in
+                      Migraine and the Identification of New Therapeutic
+                      Targets. CNS Drugs. 2019 Jun;33(6):525-537.
+                    </li>
+                    <li>
+                      Moore E, et al. Pharmacologic characterization of
+                      atogepant: A potent and selective calcitonin gene-related
+                      peptide receptor antagonist. Cephalalgia. 2024
+                      Jan;44(1):3331024231226186.
+                    </li>
+                    <li>
+                      Blair HA. Rimegepant: A Review in the Acute Treatment and
+                      Preventive Treatment of Migraine. CNS Drugs. 2023
+                      Mar;37(3):255-265.
+                    </li>
+                    <li>
+                      Andreou AP, et al. The role of erenumab in the treatment
+                      of migraine. Ther Adv Neurol Disord. 2020 May
+                      27:13:1756286420927119.
+                    </li>
+                    <li>
+                      Ohlsson L, et al. Fremanezumab blocks CGRP induced
+                      dilatation in human cerebral, middle meningeal and
+                      abdominal arteries. J Headache Pain. 2018 Aug 14;19(1):66.
+                    </li>
+                    <li>
+                      Ailani J, et al. Atogepant for the preventive treatment of
+                      migraine. NEnglJ Med. 2021;385:695-706.
+                    </li>
+                    <li>
+                      Schwedt TJ, Lipton RB, Ailani J, et al. Time course of
+                      efficacy of atogepant for the preventive treatment of
+                      migraine: results from the randomized, double-blind
+                      ADVANCE trial. Cephalalgia 2022; 42: 3-11.
+                    </li>
+                    <li>
+                      Ashina M, Tepper SJ, Reuter U, et al. Once-daily oral
+                      atogepant for the long-term preventive treatment of
+                      migraine: Findings from a multicenter, randomized,
+                      open-label, phase 3 trial. Headache. 2023;63(1):79-88.
+                    </li>
+                    <li>
+                      ОХЛП Кьюлипта ЛП-№(006822)-(РГ-RU),
+                      https://lk.regmed.ru/Register/EAEU_SmPC, дата обращения
+                      январь 2026
+                    </li>
+                  </ol>
+                </details>
               </section>
             </section>
 
             <aside className={styles.sidebar}>
               <button type="button" className={styles.sidebarMainButton}>
-                Хроническая мигрень
+                <span>Хроническая мигрень</span>
+                <img
+                  src="/icons/arrow-right4.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className={styles.sidebarMainButtonIcon}
+                />
               </button>
               <h3 className={styles.sidebarTitle}>Другие материалы по теме:</h3>
               <div className={styles.sidebarCard}>
@@ -124,22 +321,8 @@ export default async function ArticlePage(
             </aside>
           </div>
 
-          <footer className={styles.bottomBar}>
-            <span>
-              Информацию о нежелательных явлениях, связанных с применением
-              препаратов компании «ЭббВи», необходимо направить по адресу:
-              ruabhvie@abbvie.com
-            </span>
-            <span>
-              Материал подготовлен при поддержке ООО «ЭббВи», 125171, Россия, г.
-              Москва, Ленинградское ш., д.16а, стр. 1; Тел. +7 (495) 258-42-77
-            </span>
-            <span>
-              Информация предназначена исключительно для специалистов
-              здравоохранения РФ. Номер одобрения: RU-QLP-260034 март 2026
-            </span>
-          </footer>
         </div>
+        <Footer />
       </main>
     );
   }

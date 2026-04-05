@@ -1,0 +1,49 @@
+.trigger {
+  width: 100%;
+  display: block;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.modal {
+  position: relative;
+  max-width: min(1200px, 95vw);
+  max-height: 92vh;
+}
+
+.fullImage {
+  max-width: min(1200px, 95vw);
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+.close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 1;
+  color: #fff;
+  background: rgba(55, 69, 80, 0.95);
+  cursor: pointer;
+}

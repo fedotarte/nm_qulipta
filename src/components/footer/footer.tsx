@@ -6,13 +6,15 @@ export const Footer = () => (
   <footer className={styles.footer}>
     <div className={styles.container}>
       <div className={styles.logoColumn}>
-        <Image
-          src="/icons/abbvy_footer_logo_2.svg"
-          alt="AbbVie"
-          width={120}
-          height={40}
-          className={styles.logo}
-        />
+        <Link href="/" aria-label="Перейти на главную">
+          <Image
+            src="/icons/abbvy_footer_logo_2.svg"
+            alt="AbbVie"
+            width={120}
+            height={40}
+            className={styles.logo}
+          />
+        </Link>
       </div>
 
       <div className={styles.infoColumns}>
