@@ -61,7 +61,7 @@ export default async function ArticlePage(
                   ПРЕВЕНТИВНАЯ ТЕРАПИЯ МИГРЕНИ, КОТОРАЯ МОЖЕТ ДЕЙСТВОВАТЬ БЫСТРО
                 </h2>
                 <LightboxImage
-                  src="/api/figma-assets/episodic-migraine-2-1-1"
+                  src="/pictures/episodic-migraine-2-1-1.png"
                   alt="Сокращение среднего числа дней с мигренью"
                   className={styles.sectionImage}
                 />
@@ -73,7 +73,7 @@ export default async function ArticlePage(
                   ПОЛНОЕ ПРЕКРАЩЕНИЕ ПРИСТУПОВ
                 </h2>
                 <LightboxImage
-                  src="/api/figma-assets/episodic-migraine-3-2-1"
+                  src="/pictures/episodic-migraine-3-2-1.png"
                   alt="Поисковая конечная точка эффективности"
                   className={styles.sectionImage}
                 />
@@ -140,7 +140,7 @@ export default async function ArticlePage(
                       </ul>
 
                       <LightboxImage
-                        src="/api/figma-assets/episodic-migraine-group-4"
+                        src="/pictures/episodic-migraine-group-4.png"
                         alt="Частота нежелательных явлений"
                         className={styles.aeCardImage}
                       />
@@ -150,13 +150,13 @@ export default async function ArticlePage(
               </article>
 
               <LightboxImage
-                src="/api/figma-assets/episodic-migraine-frame-163"
+                src="/pictures/episodic-migraine-frame-163.png"
                 alt="Блок с преимуществами и упаковкой"
                 className={`${styles.sectionImage} ${styles.packageBlockImage}`}
               />
 
               <LightboxImage
-                src="/api/figma-assets/episodic-migraine-frame-194"
+                src="/pictures/episodic-migraine-frame-194.png"
                 alt="В каких случаях рекомендуется модификация дозы до 10 мг"
                 className={`${styles.sectionImage} ${styles.doseAdjustmentImage}`}
               />
@@ -400,7 +400,7 @@ export default async function ArticlePage(
                       </ul>
 
                       <LightboxImage
-                        src="/api/figma-assets/episodic-migraine-group-4"
+                        src="/pictures/episodic-migraine-group-4.png"
                         alt="Частота нежелательных явлений"
                         className={styles.aeCardImage}
                       />
