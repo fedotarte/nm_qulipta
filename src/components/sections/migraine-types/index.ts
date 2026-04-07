@@ -1,2 +1,0 @@
-export { MigraineTypes } from './MigraineTypes';
-

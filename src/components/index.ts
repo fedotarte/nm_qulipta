@@ -1,5 +1,5 @@
 export * from "./article-slider";
-export * from "./background-video";
+export * from "./background-image-layer";
 export * from "./header";
 export * from "./hero";
 export * from "./footer";

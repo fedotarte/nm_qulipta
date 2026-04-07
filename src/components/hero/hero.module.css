@@ -21,18 +21,33 @@
   font-size: 56px;
   line-height: 100%;
   color: var(--color-text-light);
-  margin-bottom: 6px;
+  margin-bottom: 20px;
   text-transform: uppercase;
+}
+
+.brandLogo {
+  width: 220px;
+  height: auto;
+  margin-bottom: 18px;
 }
 
 .description {
   max-width: 347px;
-  line-height: 18px;
+  line-height: 1.15;
   color: var(--color-text-light);
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 400;
   display: flex;
   margin-left: 0;
+}
+
+.disclaimer {
+  max-width: 347px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 130%;
+  margin-top: 12px;
 }
 
 /* ===== MOBILE ===== */
@@ -55,12 +70,24 @@
     margin-bottom: 12px;
   }
 
+  .brandLogo {
+    width: 150px;
+    margin: 0 auto 10px;
+  }
+
   .description {
     max-width: 100%;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 400;
     line-height: 130%;
     margin-left: 0;
     text-align: center;
+  }
+
+  .disclaimer {
+    max-width: 100%;
+    font-size: 7px;
+    text-align: center;
+    margin-top: 8px;
   }
 }

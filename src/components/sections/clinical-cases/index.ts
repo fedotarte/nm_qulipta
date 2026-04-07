@@ -1,2 +1,0 @@
-export { ClinicalCases } from './ClinicalCases';
-
