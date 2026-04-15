@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { memo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -33,24 +33,20 @@ const ArrowIcon = ({
     />
   </svg>
 );
-const LockIcon = ({ className }: { className?: string }) => (
+
+const SideChevronIcon = ({ className }: { className?: string }) => (
   <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
+    width="10"
+    height="19"
+    viewBox="0 0 10 19"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={className}
   >
     <path
-      d="M12 17.3501C12.9002 17.3501 13.63 16.6203 13.63 15.7201C13.63 14.8199 12.9002 14.0901 12 14.0901C11.0998 14.0901 10.37 14.8199 10.37 15.7201C10.37 16.6203 11.0998 17.3501 12 17.3501Z"
-      fill="#135D6C"
-    />
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M17.28 8.28V9.53C20.08 9.88 21 11.3 21 14.79V18.65C21 22.75 19.75 24 15.65 24H8.35C4.25 24 3 22.75 3 18.65V14.79C3 11.3 3.92 9.88 6.72 9.53V8.28C6.72 8.1326 6.71896 7.98257 6.7179 7.83065C6.69961 5.19978 6.67736 2 12 2C17.3226 2 17.3004 5.19978 17.2821 7.83065C17.281 7.98257 17.28 8.1326 17.28 8.28ZM8.12 9.44H8.35V9.45H15.65H15.88V8.28C15.88 8.16497 15.8803 8.05145 15.8805 7.9395C15.8868 5.19989 15.891 3.4 12 3.4C8.109 3.4 8.11316 5.19989 8.11948 7.9395C8.11974 8.05145 8.12 8.16497 8.12 8.28V9.44ZM12 12.7C10.34 12.7 8.98 14.05 8.98 15.72C8.98 16.7337 9.48343 17.6355 10.2557 18.1841V19.0614C10.2557 20.0259 11.0375 20.8077 12.002 20.8077C12.9664 20.8077 13.7482 20.0259 13.7482 19.0614V18.1841C14.5183 17.6372 15.02 16.7381 15.02 15.72C15.02 14.06 13.66 12.7 12 12.7Z"
-      fill="#135D6C"
+      d="M1.2475 17.8375C1.0575 17.8375 0.8675 17.7675 0.7175 17.6175C0.4275 17.3275 0.4275 16.8475 0.7175 16.5575L7.2375 10.0375C7.7175 9.5575 7.7175 8.7775 7.2375 8.2975L0.7175 1.7775C0.4275 1.4875 0.4275 1.0075 0.7175 0.7175C1.0075 0.4275 1.4875 0.4275 1.7775 0.7175L8.2975 7.2375C8.8075 7.7475 9.0975 8.4375 9.0975 9.1675C9.0975 9.8975 8.8175 10.5875 8.2975 11.0975L1.7775 17.6175C1.6275 17.7575 1.4375 17.8375 1.2475 17.8375Z"
+      fill="white"
+      stroke="white"
     />
   </svg>
 );
@@ -81,9 +77,17 @@ const ArticleIcon = ({ className }: { className: string }) => (
 
 interface ArticleSliderProps {
   articles: ArticleConfig[];
+  onCardHoverStart?: (article: ArticleConfig) => void;
+  onCardHoverEnd?: () => void;
+  activeArticleSlug?: string | null;
 }
 
-export const ArticleSlider = ({ articles }: ArticleSliderProps) => {
+export const ArticleSlider = ({
+  articles,
+  onCardHoverStart,
+  onCardHoverEnd,
+  activeArticleSlug,
+}: ArticleSliderProps) => {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -93,11 +97,7 @@ export const ArticleSlider = ({ articles }: ArticleSliderProps) => {
     setIsEnd(swiperInstance.isEnd);
   };
 
-  const containerClassName = `${styles.swiperContainer} ${
-    isBeginning ? styles.maskRight : ""
-  } ${isEnd ? styles.maskLeft : ""} ${
-    !isBeginning && !isEnd ? styles.maskBoth : ""
-  }`;
+  const containerClassName = styles.swiperContainer;
 
   return (
     <section className={styles.slider}>
@@ -124,9 +124,10 @@ export const ArticleSlider = ({ articles }: ArticleSliderProps) => {
               <SwiperSlide key={article.id} className={styles.slide}>
                 <ArticleCard
                   article={article}
-                  isAuthenticated={
-                    article.isAuthenticated ?? index === 0
-                  }
+                  isAuthenticated={article.isAuthenticated ?? index === 0}
+                  onHoverStart={onCardHoverStart}
+                  onHoverEnd={onCardHoverEnd}
+                  isActive={activeArticleSlug === article.slug}
                 />
               </SwiperSlide>
             ))}
@@ -163,36 +164,95 @@ export const ArticleSlider = ({ articles }: ArticleSliderProps) => {
   );
 };
 
+const CLOSED_CARD_HEIGHT = 110;
+
+function getExpandedCardHeight(article: ArticleConfig): number {
+  if (article.status === "in_dev") return CLOSED_CARD_HEIGHT;
+
+  const CHARS_PER_LINE = 27;
+  const DESC_LINE_H = 21;
+  const SUB_CHARS_PER_LINE = 45;
+  const SUB_LINE_H = 13;
+  const FIXED = 108;
+  const BUFFER = 8;
+
+  const descLen = article.description?.length ?? 0;
+  const descH = Math.ceil(descLen / CHARS_PER_LINE) * DESC_LINE_H;
+
+  const subLen = article.subtitle?.length ?? 0;
+  const subH =
+    subLen > 0 ? 8 + Math.ceil(subLen / SUB_CHARS_PER_LINE) * SUB_LINE_H : 0;
+
+  return FIXED + descH + subH + BUFFER;
+}
+
 interface ArticleCardProps {
   article: ArticleConfig;
   isAuthenticated?: boolean;
+  onHoverStart?: (article: ArticleConfig) => void;
+  onHoverEnd?: () => void;
+  isActive?: boolean;
 }
 
-export const ArticleCard = ({
+export const ArticleCard = memo(function ArticleCard({
   article,
   isAuthenticated = false,
-}: ArticleCardProps) => {
+  onHoverStart,
+  onHoverEnd,
+  isActive = false,
+}: ArticleCardProps) {
   const isInDev = article.status === "in_dev";
 
   if (isInDev) {
     return (
       <div className={styles.cardDisabled}>
-        <ArticleIcon className={styles.mobileIcon} />
-        <h3 className={styles.cardTitle}>{article.title}</h3>
         <span className={styles.devBadge}>Материал в разработке</span>
-        <ArrowIcon className={styles.cardArrowIconDisabled} />
+        <div className={styles.cardContent}>
+          <h3 className={styles.cardTitleDisabled}>{article.title}</h3>
+          <div className={styles.cardDividerDisabled} />
+          <div className={styles.cardButtonDisabled}>
+            <span className={styles.cardButtonTextDisabled}>Перейти</span>
+            <SideChevronIcon className={styles.cardButtonArrowDisabled} />
+          </div>
+        </div>
+        <ArrowIcon className={styles.cardArrowIcon} />
       </div>
     );
   }
 
-  const cardClassName = isAuthenticated ? styles.card : styles.cardLocked;
+  const cardClassName = `${isAuthenticated ? styles.card : styles.cardLocked} ${
+    isActive ? styles.cardActive : ""
+  }`;
+
+  const expandedHeight = getExpandedCardHeight(article);
+  const cardStyle = {
+    "--expanded-h": `${expandedHeight}px`,
+  } as React.CSSProperties;
 
   const linkHref = article.href ?? `/articles/${article.slug}`;
+  const handleMouseEnter = () => onHoverStart?.(article);
+  const handleMouseLeave = () => onHoverEnd?.();
 
   return (
-    <Link href={linkHref} className={cardClassName}>
+    <Link
+      href={linkHref}
+      className={cardClassName}
+      style={cardStyle}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseEnter}
+      onBlur={handleMouseLeave}
+    >
       <ArticleIcon className={styles.mobileIcon} />
-      {!isAuthenticated && <LockIcon className={styles.lockIcon} />}
+      {!isAuthenticated && (
+        <Image
+          src="/icons/gold_lock.svg"
+          alt=""
+          width={24}
+          height={24}
+          className={styles.lockIcon}
+        />
+      )}
       <div className={styles.cardContent}>
         <h3 className={styles.cardTitle}>{article.title}</h3>
         <div className={styles.cardDivider} />
@@ -207,17 +267,20 @@ export const ArticleCard = ({
             {article.description}
           </p>
         )}
+        {article.subtitle && (
+          <p className={styles.cardSubtitle}>{article.subtitle}</p>
+        )}
         <div className={styles.cardButton}>
-          <span>
+          <span className={styles.cardButtonText}>
             {isAuthenticated ? "Перейти" : "Авторизуйтесь для просмотра"}
           </span>
-          {isAuthenticated && <ArrowIcon className={styles.cardButtonArrow} />}
+          <SideChevronIcon className={styles.cardButtonArrow} />
         </div>
       </div>
       <ArrowIcon className={styles.cardArrowIcon} />
     </Link>
   );
-};
+});
 
 const MobileArticleCard = ({ article }: { article: ArticleConfig }) => {
   const isInDev = article.status === "in_dev";

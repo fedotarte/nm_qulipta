@@ -4,9 +4,12 @@ export interface ArticleConfig {
   id: string;
   slug: string;
   title: string;
+  subtitle?: string;
   description?: string;
   status: ArticleStatus;
   icon?: string;
+  /** Фоновое hero-изображение для главной страницы */
+  heroImage?: string;
   /** Кастомная ссылка (например, на игру). Если не задано — используется /articles/{slug} */
   href?: string;
   /** Всегда доступен без авторизации (для квиза, игры и т.п.) */
@@ -16,12 +19,29 @@ export interface ArticleConfig {
 export const ARTICLES: ArticleConfig[] = [
   {
     id: "1",
-    slug: "clinical-recommendations",
-    title: "Клинические рекомендации по терапии ПОУГ",
+    slug: "chronic-migraine",
+    title: "Хроническая мигрень",
+    subtitle:
+      "\t1\tBuse DC, et al. Headache. 2019;59:1286-99.\n" +
+      "\t2\tМигрень. Клинические рекомендации. Одобрены Научно-практическим Советом Минздрава РФ. Год утверждения 2024 https://cr.minzdrav.gov.ru/recomend/295",
     description:
-      "Цель терапии остается неизменной — важно стремиться к сохранению зрения и связанного с ним уровня жизни путем достижения терапевтического эффекта при мин…",
+      "Пациенты с хронической мигренью становятся заложниками своей болезни: Мигрень может негативно влиять на многие важные аспекты их жизни, включая брак, воспитание детей, романтические и семейные отношения, карьерные/финансовые достижения, а также общее состояние здоровья1. Именно поэтому они особенно нуждаются в таргетной превентивной терапии, способной воздействовать на патогенез заболевания2.",
     status: "done",
-    icon: "/icons/article-1.svg",
+    icon: "/icons/book.svg",
+    heroImage: "/pictures/hero-hover-chronic.png",
+  },
+  {
+    id: "2",
+    slug: "episodic-migraine",
+    title: "Эпизодическая мигрень",
+    description:
+      "Эпизодическая мигрень лишает людей возможности строить планы, важные и семейные события могут оказаться под угрозой из-за внезапного приступа1. Мигрень также может создавать трудности в отношениях1. Поэтому помимо купирования приступов применяются профилактические методы лечения для снижения частоты и тяжести приступов2,3.",
+    status: "done",
+    icon: "/icons/book.svg",
+    heroImage: "/pictures/hero-hover-episodic.png",
+    isAuthenticated: true,
+    subtitle:
+      "1.Buse DC et al. Mayo Clin Proc 2016;91:596–611. 2  American Headache Society. The American Headache Society position statement on integrating new migraine treatments into clinical practice. Headache 2019; 59:1-18. 3  Мигрень. Клинические рекомендации. Одобрены Научно-практическим Советом Минздрава РФ. Год утверждения 2024 https://cr.minzdrav.gov.ru/recomend/295",
   },
   {
     id: "quiz",
@@ -31,103 +51,42 @@ export const ARTICLES: ArticleConfig[] = [
       "Поставьте верный диагноз и назначьте лечение пациентке с головной болью. Клинический разбор с Мариной Игоревной Корешкиной, доктором медицинских наук, членом Европейской академии неврологии и Российского общества головной боли.",
     status: "done",
     icon: "/icons/book.svg",
+    heroImage: "/pictures/hero-hover-quiz.png",
     href: "/game/",
     isAuthenticated: true,
   },
   {
-    id: "2",
-    slug: "episodic-migraine",
-    title: "Эпизодическая мигрень",
-    description:
-      "Страница статьи с материалами по профилактической терапии эпизодической мигрени.",
-    status: "done",
-    icon: "/icons/book.svg",
-  },
-  {
-    id: "10",
-    slug: "chronic-migraine",
-    title: "Хроническая мигрень",
-    description:
-      "Страница статьи с материалами по профилактической терапии хронической мигрени.",
-    status: "done",
-    icon: "/icons/book.svg",
-  },
-  {
     id: "3",
-    slug: "neuroprotection",
-    title: "Нейропротекция при глаукоме",
-    description:
-      "Современные подходы к нейропротекции при глаукоме и их клиническое применение в офтальмологической практике.",
+    slug: "clinical-cases",
+    title: "Клинические случаи",
+    description: "Подборка клинических случаев по терапии мигрени.",
     status: "done",
-    icon: "/icons/article-2.svg",
+    icon: "/icons/book.svg",
   },
   {
     id: "4",
-    slug: "apg-difference",
-    title: "АПГ: В чем разница между молекулами?",
+    slug: "expert-answers",
+    title: "Ответы экспертов",
     description:
-      "Сравнительный анализ аналогов простагландинов: особенности молекул и их влияние на эффективность терапии.",
+      "Ответы экспертов на частые вопросы по терапии и ведению пациентов.",
     status: "done",
-    icon: "/icons/article-3.svg",
+    icon: "/icons/book.svg",
+    heroImage: "/pictures/hero_expert_answers.png",
   },
   {
     id: "5",
-    slug: "lumistart",
-    title: "ЛЮМИСТАРТ — новый старт в терапии ПОУГ",
-    description:
-      "Инновационный подход к лечению первичной открытоугольной глаукомы с применением современных препаратов.",
-    status: "done",
-    icon: "/icons/article-4.svg",
+    slug: "webinar-recordings",
+    title: "Записи вебинаров",
+    description: "Архив записей вебинаров с экспертами.",
+    status: "in_dev",
+    icon: "/icons/book.svg",
   },
   {
     id: "6",
-    slug: "quality-of-life",
-    title: "Как повысить качество жизни у пациентов с глаукомой?",
-    description:
-      "Комплексный подход к улучшению качества жизни пациентов: от диагностики до долгосрочной терапии.",
-    status: "done",
-    icon: "/icons/article-5.svg",
-  },
-  {
-    id: "7",
-    slug: "surface-diseases",
-    title: "Заболевания поверхности глаз и приверженность к лечению",
-    description:
-      "Влияние заболеваний поверхности глаз на комплаентность пациентов и стратегии повышения приверженности.",
-    status: "done",
-    icon: "/icons/article-6.svg",
-  },
-  {
-    id: "8",
-    slug: "therapy-start",
-    title: "Старт терапии: какой препарат выбрать?",
-    description:
-      "Руководство по выбору оптимального препарата для начала терапии глаукомы.",
+    slug: "library",
+    title: "Библиотека",
+    description: "База материалов, публикаций и методических документов.",
     status: "in_dev",
-    icon: "/icons/article-7.svg",
-  },
-  {
-    id: "9",
-    slug: "patient-memo",
-    title: "Памятка для пациентов",
-    description:
-      "Полезная информация для пациентов о глаукоме и правилах применения препаратов.",
-    status: "in_dev",
-    icon: "/icons/article-8.svg",
+    icon: "/icons/book.svg",
   },
 ];
-
-// Хелперы для работы со статьями
-export const getAllArticles = (): ArticleConfig[] => ARTICLES;
-
-// export const getArticleBySlug = (slug: string): ArticleConfig | undefined =>
-//   ARTICLES.find((article) => article.slug === slug);
-//
-// export const getArticleSlugs = (): string[] =>
-//   ARTICLES.map((article) => article.slug);
-//
-// export const getDoneArticles = (): ArticleConfig[] =>
-//   ARTICLES.filter((article) => article.status === "done");
-//
-// export const getInDevArticles = (): ArticleConfig[] =>
-//   ARTICLES.filter((article) => article.status === "in_dev");

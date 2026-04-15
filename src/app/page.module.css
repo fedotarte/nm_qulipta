@@ -10,17 +10,104 @@
     flex-direction: column;
     position: relative;
     overflow: hidden;
+    isolation: isolate;
+    background-color: transparent;
 }
 
-.backgroundVideo {
+.page[data-visual="episodic"] {
+    background-color: #4a535e;
+}
+
+.heroDesktopGradient {
+    display: none;
+    --hero-base-color: rgba(16, 50, 65, 0.16);
+    --hero-wash-gradient: linear-gradient(
+        90deg,
+        rgba(8, 19, 26, 0.42) 0%,
+        rgba(8, 19, 26, 0.14) 40%,
+        rgba(8, 19, 26, 0.28) 100%
+    );
+    --hero-ellipse-gradient: radial-gradient(
+        ellipse at center,
+        rgba(245, 118, 44, 0.85) 0%,
+        rgba(245, 118, 44, 0.48) 40%,
+        rgba(245, 118, 44, 0) 72%
+    );
+}
+
+.heroDesktopGradient::before,
+.heroDesktopGradient::after {
+    content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 0 50%;
-    z-index: 0;
+    pointer-events: none;
+}
+
+.heroDesktopGradient::before {
+    width: min(74vw, 1120px);
+    height: 130vh;
+    left: -28vw;
+    top: -16vh;
+    transform: rotate(-18deg);
+    border-radius: 999px;
+    background: var(--hero-ellipse-gradient);
+}
+
+.heroDesktopGradient::after {
+    inset: 0;
+    background: var(--hero-wash-gradient);
+}
+
+.heroDesktopGradient[data-visual="chronic"] {
+    /*--hero-base-color: rgba(96, 104, 114, 0.95);*/
+    --hero-wash-gradient: linear-gradient(
+        90deg,
+        rgba(96, 104, 114, 0) 36%,
+        rgba(74, 83, 94, 0.58) 72%,
+        rgba(53, 62, 73, 0.9) 100%
+    );
+    /*--hero-ellipse-gradient: radial-gradient(*/
+    /*    ellipse at center,*/
+    /*    rgba(0, 0, 0, 0) 0%,*/
+    /*    rgba(0, 0, 0, 0) 100%*/
+    /*);*/
+}
+
+.heroDesktopGradient[data-visual="home"] {
+    --hero-base-color: rgba(239, 95, 24, 0.14);
+    --hero-wash-gradient: linear-gradient(
+        90deg,
+        rgba(27, 33, 39, 0.36) 0%,
+        rgba(27, 33, 39, 0.12) 42%,
+        rgba(27, 33, 39, 0.28) 100%
+    );
+    --hero-ellipse-gradient: radial-gradient(
+        ellipse at center,
+        rgba(245, 109, 37, 0.84) 0%,
+        rgba(245, 109, 37, 0.45) 40%,
+        rgba(245, 109, 37, 0) 74%
+    );
+}
+
+.heroDesktopGradient[data-visual="episodic"] {
+    --hero-base-color: transparent;
+    --hero-wash-gradient: none;
+    --hero-ellipse-gradient: none;
+}
+
+.heroDesktopGradient[data-visual="quiz"] {
+    --hero-base-color: rgba(1, 92, 134, 0.18);
+    --hero-wash-gradient: linear-gradient(
+        90deg,
+        rgba(1, 58, 88, 0.48) 0%,
+        rgba(1, 58, 88, 0.16) 42%,
+        rgba(1, 58, 88, 0.3) 100%
+    );
+    --hero-ellipse-gradient: radial-gradient(
+        ellipse at center,
+        rgba(9, 174, 226, 0.7) 0%,
+        rgba(9, 174, 226, 0.35) 40%,
+        rgba(9, 174, 226, 0) 76%
+    );
 }
 
 .globalMobileFide {
@@ -56,6 +143,15 @@
 }
 
 @media (min-width: 1024px) {
+    .heroDesktopGradient {
+        display: block;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-color: var(--hero-base-color);
+    }
+
     .globalMobileFide, .globalMobileFideBottom {
         display: none;
     }

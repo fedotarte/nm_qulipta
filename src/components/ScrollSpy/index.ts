@@ -1,2 +1,0 @@
-export { ScrollSpy } from './ScrollSpy';
-
