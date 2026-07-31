@@ -146,6 +146,11 @@
   font-weight: 600;
 }
 
+.sectionSup {
+  font-size: 12px;
+  font-weight: 800;
+}
+
 .sectionImage {
   width: 970px;
   height: auto;
