@@ -86,7 +86,7 @@
 
 .card,
 .cardLocked {
-  background: linear-gradient(124.96deg, rgba(55, 69, 80, 0.4) 27.01%, rgba(241, 94, 34, 0.4) 110.99%);
+  /*background: linear-gradient(124.96deg, rgba(55, 69, 80, 0.4) 27.01%, rgba(241, 94, 34, 0.4) 110.99%);*/
   backdrop-filter: blur(17px);
   -webkit-backdrop-filter: blur(17px);
   box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.35);
@@ -163,7 +163,7 @@
     width: 306px;
     height: var(--expanded-h, 260px);
     margin-top: calc(110px - var(--expanded-h, 260px));
-    background: linear-gradient(180deg, #107e9ae8 0%, #374550d1 100%);
+    /*background: linear-gradient(180deg, #107e9ae8 0%, #374550d1 100%);*/
     backdrop-filter: blur(17px);
     -webkit-backdrop-filter: blur(17px);
     box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.35);
@@ -347,7 +347,7 @@
 }
 
 .cardDisabled {
-  background: linear-gradient(124.96deg, rgba(55, 69, 80, 0.4) 27.01%, rgba(241, 94, 34, 0.4) 110.99%);
+  /*background: linear-gradient(124.96deg, rgba(55, 69, 80, 0.4) 27.01%, rgba(241, 94, 34, 0.4) 110.99%);*/
   backdrop-filter: blur(17px);
   -webkit-backdrop-filter: blur(17px);
   box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.35);

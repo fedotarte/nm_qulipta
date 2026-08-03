@@ -7,6 +7,7 @@ interface HeroProps {
   subtitle?: string;
   description: string;
   disclaimer?: string;
+  legalText?: string;
   children?: ReactNode;
 }
 
@@ -15,29 +16,36 @@ export const Hero = ({
   subtitle,
   description,
   disclaimer,
+  legalText,
   children,
 }: HeroProps) => (
   <section className={styles.hero}>
-    <div className={styles.content}>
-      <h1 className={styles.title}>
-        {title}
-        {subtitle ? (
-          <>
-            <br />
-            {subtitle}
-          </>
-        ) : null}
-      </h1>
-      <Image
-        src="/icons/qlipta-logo-hero.svg"
-        alt="Кьюлипта"
-        width={220}
-        height={77}
-        className={styles.brandLogo}
-      />
-      <p className={styles.description}>{description}</p>
-      {disclaimer && (
-        <p className={styles.disclaimer}>{disclaimer}</p>
+    <div className={styles.topContent}>
+      <div className={styles.content}>
+        <Image
+          src="/icons/qlipta-logo-hero.svg"
+          alt="Кьюлипта"
+          width={220}
+          height={77}
+          className={styles.brandLogo}
+        />
+        <h1 className={styles.title}>
+          {title}
+          {subtitle ? (
+            <>
+              <br />
+              {subtitle}
+            </>
+          ) : null}
+        </h1>
+        <p className={styles.description}>{description}</p>
+        {disclaimer && <p className={styles.disclaimer}>{disclaimer}</p>}
+      </div>
+
+      {legalText && (
+        <aside className={styles.legalCard} aria-label="Информация о препарате">
+          <p>{legalText}</p>
+        </aside>
       )}
     </div>
 

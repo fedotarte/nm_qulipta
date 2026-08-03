@@ -57,7 +57,7 @@ export const Header = () => {
       >
         <nav className={styles.nav}>
           <button type="button" className={styles.loginButton}>
-            Войти
+            Личный кабинет
           </button>
           <button
             type="button"

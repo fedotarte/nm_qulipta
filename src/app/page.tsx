@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./page.module.css";
 import {
   ArticleSlider,
@@ -14,11 +14,7 @@ import {
 import type { ArticleConfig } from "@/content";
 import { getAllArticles } from "@/content";
 
-type HeroVisualKey = "home" | "chronic" | "episodic" | "quiz";
-
-const HOVER_IMAGE_DEBOUNCE_MS = 120;
-const DEFAULT_HERO_VISUAL: HeroVisualKey = "home";
-const DEFAULT_HERO_IMAGE_SRC = "/pictures/cheetah_hero.png";
+const DEFAULT_HERO_IMAGE_SRC = "/pictures/cheetah-hero.png";
 const HERO_CARD_ORDER = [
   "chronic-migraine",
   "episodic-migraine",
@@ -29,21 +25,61 @@ const HERO_CARD_ORDER = [
   "library",
 ] as const;
 const HERO_CARD_SLUGS = new Set<string>(HERO_CARD_ORDER);
-const HERO_VISUAL_BY_SLUG: Record<string, HeroVisualKey> = {
-  "chronic-migraine": "chronic",
-  "episodic-migraine": "episodic",
-  "interactive-quiz": "quiz",
-};
-const HERO_DIMMING_BY_VISUAL: Record<HeroVisualKey, number> = {
-  home: 0.04,
-  chronic: 0.04,
-  episodic: 0,
-  quiz: 0.1,
-};
 const URL_ACTIVE_TAB_KEY = "tab";
+const HERO_LEGAL_TEXT = `Кьюлипта (атогепант)
+Ознакомиться с полной инструкцией по медицинскому применению лекарственного препарата/ОХЛП можно по ссылке
+ЛП-№ (006822)-(РГ-RU). Дата регистрации 09.09.2024
+
+* Препарат КЬЮЛИПТА показан для профилактического лечения мигрени, возникающей не менее 4 дней в месяц, у взрослых в возрасте от 18 лет1.
+Пациенты с эпизодической мигренью в исследовании ADVANCE2, и пациенты с хронической мигренью в исследовании PROGRESS3, получавшие препарат КЬЮЛИПТА в дозе 60 мг один раз в сутки, в течение 12 недель достигли основные конечные точки эффективности и продемонстрировали статистически значимое уменьшение среднего количества дней с мигренью в месяц по сравнению с плацебо.
+
+1. ОХЛП Кьюлипта ЛП-№ (006822)-(РГ-RU), https://lk.regmed.ru/Register/EAEU_SmPC, дата обращения июнь 2026;
+2. Ailani J, et al. N Engl J Med. 2021; 385: 695–706.
+3. Pozo-Rosich P, et al. Lancet. 2023;402(10404):775–785; erratum, 2023.
+
+** ОХЛП Кьюлипта ЛП-№(006822)-(РГ-RU), https://lk.regmed.ru/Register/EAEU_SmPC, дата обращения июнь 2026; регистрационное удостоверение ЛП-№(006822)-(РГ-RU) от 09.09.2024
+https://grls.rosminzdrav.ru/`;
+
+function preloadHeroImage(src: string): Promise<void> {
+  return new Promise((resolve) => {
+    const image = new window.Image();
+    let isSettled = false;
+
+    const finish = () => {
+      if (isSettled) {
+        return;
+      }
+
+      isSettled = true;
+      image.onload = null;
+      image.onerror = null;
+      resolve();
+    };
+
+    image.onload = () => {
+      if (!image.decode) {
+        finish();
+        return;
+      }
+
+      image.decode().then(finish, finish);
+    };
+    image.onerror = finish;
+    image.src = src;
+
+    if (image.complete) {
+      if (!image.decode) {
+        finish();
+        return;
+      }
+
+      image.decode().then(finish, finish);
+    }
+  });
+}
 
 export default function Home() {
-  const articles = getAllArticles();
+  const articles = useMemo(() => getAllArticles(), []);
   const orderedArticles = useMemo(() => {
     const bySlug = new Map(articles.map((article) => [article.slug, article]));
     return HERO_CARD_ORDER.map((slug) => bySlug.get(slug)).filter(
@@ -56,17 +92,19 @@ export default function Home() {
     );
     return new Map<string, string>(imageEntries);
   }, [articles]);
+  const heroImageSources = useMemo(
+    () =>
+      Array.from(
+        new Set([DEFAULT_HERO_IMAGE_SRC, ...heroImageBySlug.values()]),
+      ),
+    [heroImageBySlug],
+  );
 
-  const [activeHeroVisual, setActiveHeroVisual] =
-    useState<HeroVisualKey>(DEFAULT_HERO_VISUAL);
   const [activeCardSlug, setActiveCardSlug] = useState<string | null>(null);
-  const activeCardSlugRef = useRef<string | null>(null);
+  const [areHeroImagesReady, setAreHeroImagesReady] = useState(false);
   const activeHeroImageSrc =
     (activeCardSlug && heroImageBySlug.get(activeCardSlug)) ??
     DEFAULT_HERO_IMAGE_SRC;
-  const activeHeroDimming = HERO_DIMMING_BY_VISUAL[activeHeroVisual];
-  const isEpisodicVisual = activeHeroVisual === "episodic";
-  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const syncUrlWithActiveTab = useCallback((slug: string) => {
     const url = new URL(window.location.href);
     url.searchParams.set(URL_ACTIVE_TAB_KEY, slug);
@@ -74,38 +112,29 @@ export default function Home() {
     window.history.replaceState(window.history.state, "", url);
   }, []);
 
-  const scheduleVisualUpdate = useCallback((nextVisual: HeroVisualKey) => {
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current);
-    }
-
-    hoverTimeoutRef.current = setTimeout(() => {
-      setActiveHeroVisual(nextVisual);
-    }, HOVER_IMAGE_DEBOUNCE_MS);
-  }, []);
-
   const handleCardHoverStart = useCallback(
     (article: ArticleConfig) => {
       setActiveCardSlug(article.slug);
-      activeCardSlugRef.current = article.slug;
       syncUrlWithActiveTab(article.slug);
-
-      const heroVisual = HERO_VISUAL_BY_SLUG[article.slug];
-      if (!heroVisual) {
-        return;
-      }
-
-      scheduleVisualUpdate(heroVisual);
     },
-    [scheduleVisualUpdate, syncUrlWithActiveTab],
+    [syncUrlWithActiveTab],
   );
 
-  const handleCardHoverEnd = useCallback(() => {
-    const slug = activeCardSlugRef.current;
-    const pinnedVisual =
-      (slug && HERO_VISUAL_BY_SLUG[slug]) ?? DEFAULT_HERO_VISUAL;
-    scheduleVisualUpdate(pinnedVisual as HeroVisualKey);
-  }, [scheduleVisualUpdate]);
+  useEffect(() => {
+    let isCancelled = false;
+
+    setAreHeroImagesReady(false);
+
+    Promise.allSettled(heroImageSources.map(preloadHeroImage)).then(() => {
+      if (!isCancelled) {
+        setAreHeroImagesReady(true);
+      }
+    });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [heroImageSources]);
 
   useEffect(() => {
     const syncStateWithUrl = () => {
@@ -116,13 +145,10 @@ export default function Home() {
 
       if (!fromUrl || !HERO_CARD_SLUGS.has(fromUrl)) {
         setActiveCardSlug(null);
-        setActiveHeroVisual(DEFAULT_HERO_VISUAL);
         return;
       }
 
       setActiveCardSlug(fromUrl);
-      const visualFromTab = HERO_VISUAL_BY_SLUG[fromUrl];
-      setActiveHeroVisual(visualFromTab ?? DEFAULT_HERO_VISUAL);
     };
 
     syncStateWithUrl();
@@ -135,43 +161,26 @@ export default function Home() {
     };
   }, []);
 
-  useEffect(
-    () => () => {
-      if (hoverTimeoutRef.current) {
-        clearTimeout(hoverTimeoutRef.current);
-      }
-    },
-    [],
-  );
-
   return (
-    <div className={styles.page} data-visual={activeHeroVisual}>
-      <BackgroundImageLayer
-        src={activeHeroImageSrc}
-        dimming={activeHeroDimming}
-        objectFit={isEpisodicVisual ? "contain" : undefined}
-        objectPosition={isEpisodicVisual ? "right center" : undefined}
-      />
-      <div
-        className={styles.heroDesktopGradient}
-        data-visual={activeHeroVisual}
-        aria-hidden="true"
-      />
-      <div className={styles.globalMobileFide}></div>
-      <div className={styles.globalMobileFideBottom}></div>
+    <div className={styles.page}>
+      <BackgroundImageLayer src={activeHeroImageSrc} priority />
+      {!areHeroImagesReady && (
+        <div className={styles.pageLoader} role="status" aria-live="polite">
+          <span>Загрузка...</span>
+        </div>
+      )}
       <Header />
 
       <main className={styles.main}>
         <Hero
-          title="Быстрее, чем мигрень"
+          title="Опережая мигрень*"
           subtitle=""
-          description="Первый гепант для превентивной терапии мигрени, одобренный в РФ*"
-          disclaimer="* ОХЛП Кьюлипта ЛП-№(006822)-(РГ-RU), https://lk.regmed.ru/Register/EAEU_SmPC, дата обращения март 2026; регистрационное удостоверение ЛП-№(006822)-(РГ-RU) от 09.09.2024"
+          description="Единственный гепант для превентивной терапии хронической мигрени, одобренный в РФ**."
+          legalText={HERO_LEGAL_TEXT}
         >
           <ArticleSlider
             articles={orderedArticles}
             onCardHoverStart={handleCardHoverStart}
-            onCardHoverEnd={handleCardHoverEnd}
             activeArticleSlug={activeCardSlug}
           />
         </Hero>

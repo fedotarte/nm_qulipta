@@ -1,9 +1,9 @@
 {
-  "name": "glau",
+  "name": "qulipta",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 5001",
     "build": "next build --webpack",
     "build:game": "cd game && npm ci && npm run build && rm -rf ../public/game && mkdir -p ../public/game && cp -r out/* ../public/game/ && cp ../public/game/game.html ../public/game/index.html",
     "start": "next start",

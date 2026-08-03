@@ -1,160 +1,14 @@
 .page {
-    min-height: 100vh;
-    max-width: 100vw;
-    width: 100%;
-    margin: 0 auto;
-    background-size: cover;
-    background-position: 0 50%;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    background-color: transparent;
-}
-
-.page[data-visual="episodic"] {
-    background-color: #4a535e;
-}
-
-.heroDesktopGradient {
-    display: none;
-    --hero-base-color: rgba(16, 50, 65, 0.16);
-    --hero-wash-gradient: linear-gradient(
-        90deg,
-        rgba(8, 19, 26, 0.42) 0%,
-        rgba(8, 19, 26, 0.14) 40%,
-        rgba(8, 19, 26, 0.28) 100%
-    );
-    --hero-ellipse-gradient: radial-gradient(
-        ellipse at center,
-        rgba(245, 118, 44, 0.85) 0%,
-        rgba(245, 118, 44, 0.48) 40%,
-        rgba(245, 118, 44, 0) 72%
-    );
-}
-
-.heroDesktopGradient::before,
-.heroDesktopGradient::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-}
-
-.heroDesktopGradient::before {
-    width: min(74vw, 1120px);
-    height: 130vh;
-    left: -28vw;
-    top: -16vh;
-    transform: rotate(-18deg);
-    border-radius: 999px;
-    background: var(--hero-ellipse-gradient);
-}
-
-.heroDesktopGradient::after {
-    inset: 0;
-    background: var(--hero-wash-gradient);
-}
-
-.heroDesktopGradient[data-visual="chronic"] {
-    /*--hero-base-color: rgba(96, 104, 114, 0.95);*/
-    --hero-wash-gradient: linear-gradient(
-        90deg,
-        rgba(96, 104, 114, 0) 36%,
-        rgba(74, 83, 94, 0.58) 72%,
-        rgba(53, 62, 73, 0.9) 100%
-    );
-    /*--hero-ellipse-gradient: radial-gradient(*/
-    /*    ellipse at center,*/
-    /*    rgba(0, 0, 0, 0) 0%,*/
-    /*    rgba(0, 0, 0, 0) 100%*/
-    /*);*/
-}
-
-.heroDesktopGradient[data-visual="home"] {
-    --hero-base-color: rgba(239, 95, 24, 0.14);
-    --hero-wash-gradient: linear-gradient(
-        90deg,
-        rgba(27, 33, 39, 0.36) 0%,
-        rgba(27, 33, 39, 0.12) 42%,
-        rgba(27, 33, 39, 0.28) 100%
-    );
-    --hero-ellipse-gradient: radial-gradient(
-        ellipse at center,
-        rgba(245, 109, 37, 0.84) 0%,
-        rgba(245, 109, 37, 0.45) 40%,
-        rgba(245, 109, 37, 0) 74%
-    );
-}
-
-.heroDesktopGradient[data-visual="episodic"] {
-    --hero-base-color: transparent;
-    --hero-wash-gradient: none;
-    --hero-ellipse-gradient: none;
-}
-
-.heroDesktopGradient[data-visual="quiz"] {
-    --hero-base-color: rgba(1, 92, 134, 0.18);
-    --hero-wash-gradient: linear-gradient(
-        90deg,
-        rgba(1, 58, 88, 0.48) 0%,
-        rgba(1, 58, 88, 0.16) 42%,
-        rgba(1, 58, 88, 0.3) 100%
-    );
-    --hero-ellipse-gradient: radial-gradient(
-        ellipse at center,
-        rgba(9, 174, 226, 0.7) 0%,
-        rgba(9, 174, 226, 0.35) 40%,
-        rgba(9, 174, 226, 0) 76%
-    );
-}
-
-.globalMobileFide {
-    background:
-        linear-gradient(
-                180.07deg,
-                rgba(0, 0, 0, 0.3) 0.06%,
-                rgba(0, 0, 0, 0.3) 63.6%,
-                rgba(102, 102, 102, 0) 99.94%
-        ),
-        linear-gradient(
-                        360deg,
-                        rgba(19, 93, 108, 0) 0%,
-                        rgba(19, 93, 108, 0.7) 39.33%,
-                        rgba(10, 153, 166, 0.7) 100%
-        );
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 388px;
-    z-index: 1;
-}
-.globalMobileFideBottom {
-    background: linear-gradient(360deg, rgba(10, 153, 166, 0) 0%, #0A99A6 66.35%, #0A99A6 100%);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 388px;
-    transform: rotate(180deg);
-    z-index: 1;
-}
-
-@media (min-width: 1024px) {
-    .heroDesktopGradient {
-        display: block;
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        background-color: var(--hero-base-color);
-    }
-
-    .globalMobileFide, .globalMobileFideBottom {
-        display: none;
-    }
+  min-height: 100vh;
+  max-width: 100vw;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: transparent;
 }
 
 .main {
@@ -163,4 +17,18 @@
   flex-direction: column;
   position: relative;
   z-index: 1;
+}
+
+.pageLoader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #374550;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
